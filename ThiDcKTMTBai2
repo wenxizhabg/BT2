@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+const int C = 12;
+
+int SSum (int N) {
+	int S = 0;
+	for (int i = 1; i <= N; i++) S += i * i * i;
+	S += C;
+	return S;
+}
+
+int main() {
+	cout << "Nhập N1  và N2: ";
+	int N1, N2; cin >> N1 >> N2;
+
+	while ((0 < N1 && N1 <= N2) == false) {
+		cout << "N1 và N2 không thỏa điều kiện" << endl;
+		cout << "Nhập lại N1 và N2: "; cin >> N1 >> N2;
+	}
+
+	int S1 = SSum(N1), S2 = SSum(N2);
+	cout << "S1 = " << S1 << endl;
+	cout << "S1 = " << S2 << endl;
+
+	return 0;
+}

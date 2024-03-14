@@ -1,0 +1,3 @@
+if (a + b > c && b + c > a && a + c > b) 
+    cout << a << ", " << b << ", " << c << " là ba cạnh của một tam giác.";
+else cout << a << ", " << b << ", " << c << " không phải là ba cạnh của một tam giác.";

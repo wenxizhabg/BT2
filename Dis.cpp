@@ -1,14 +1,11 @@
 #include <fstream>
+#define bp(x) x * x
 using namespace std;
 using ull = unsigned long long;
 
 struct vec {
     int x, y, z;
 };
-
-ull bp (ull x) {
-    return x * x;
-}
 
 ull dis (vec a, vec b) {
     return bp(a.x - b.x) + bp(a.y - b.y) + bp(a.z - b.z);

@@ -1,17 +1,15 @@
 #include <fstream>
 using namespace std;
 
-struct vecto {
-    int x, y, huong;
-};
-
 int main () {
     ifstream in ("ZigZag.inp");
     ofstream out ("ZigZag.out");
 
     int n, s; in >> n >> s;
     int maTran [n][n];
-    vecto vec;
+    struct {
+        int x, y, huong;
+    } vec;
 
     for (int duongCheo = - (n-1); duongCheo <= (n-1); duongCheo++) {
         int doLonDuongCheo = (duongCheo > 0) ? duongCheo : -duongCheo;

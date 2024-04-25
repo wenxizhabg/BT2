@@ -1,0 +1,89 @@
+#include <iostream>
+using namespace std;
+
+enum loai {KHOAHOC, TIEUTHUYET, THAMKHAO};
+
+struct sach {
+    char tensach[50], tentacgia[50];
+    int namxuatban;
+    float khuyenmai, giagoc, giaban;
+    loai theloai;
+};
+
+void nhapnamhientai (int& namhientai) {
+    cout << "Nhập năm hiện tại: "; cin >> namhientai;
+}
+
+void nhapquyensach (sach& book) {
+    cout << "Nhập tên sách: "; cin >> book.tensach;
+    cout << "Nhập tác giả: "; cin >> book.tentacgia;
+    cout << "Nhập năm xuất bản: "; cin >> book.namxuatban;
+    cout << "Nhập thể loại (0: Khoa học, 1: Thân thiết, 2: Tham khảo): ";
+        int x; cin >> x;
+        book.theloai = loai (x);
+    cout << "Nhập giá gốc: "; cin >> book.giagoc;
+}
+
+void tinhkhuyenmai (sach& book, int namhientai) {
+    int thoigian = namhientai - book.namxuatban;
+    book.khuyenmai = (thoigian/5) * 0.05;
+}
+// thoigian là kiểu int nên phép chia lấy phần nguyên
+
+void tinhgiaban (sach& book) {
+    book.giaban = book.giagoc * (1.00 - book.khuyenmai);
+}
+
+void xuatquyensach (sach book) {
+    cout << "Tên sách là " << book.tensach << endl;
+    cout << "Tên tác giả là " << book.tentacgia << endl;
+    cout << "Năm xuất bản là " << book.namxuatban << endl;
+    cout << "Thể loại là ";
+        if (book.theloai == 0) cout << "Khoa học" << endl;
+        if (book.theloai == 1) cout << "Tiểu thuyết" << endl;
+        if (book.theloai == 2) cout << "Tham khảo" << endl;
+    cout << "Giá gốc là " << book.giagoc << endl;
+    cout << "Khuyến mãi là " << book.khuyenmai * 100 << "%" << endl;
+    cout << "Giá bán là " << book.giaban << endl;
+}
+
+struct hoadon {
+    sach danhsach [1000];
+    int n, soluong [1000];
+    float tongtien;
+};
+
+void nhaphoadon (hoadon& hd, int namhientai) {
+    hd.tongtien = 0;
+    cout << "Nhập số sách: "; cin >> hd.n;
+    cout << endl;
+    for (int i = 1; i <= hd.n; i++) {
+        cout << "Nhập quyển sách thứ " << i << ":" << endl;
+        nhapquyensach(hd.danhsach[i]);
+        tinhkhuyenmai(hd.danhsach[i], namhientai);
+        tinhgiaban(hd.danhsach[i]);
+        cout << "Nhập số lượng mua: "; cin >> hd.soluong[i];
+        hd.tongtien += hd.danhsach[i].giaban * hd.soluong[i];
+        cout << endl;
+    }
+}
+
+void xuathoadon (hoadon hd) {
+    for (int i = 1; i <= hd.n; i++) {
+        cout << "Sách thứ  " << i << ":" << endl;
+        xuatquyensach(hd.danhsach[i]);
+        cout << "Số lượng mua là " << hd.soluong[i] << endl << endl;
+    }
+    cout << "Tổng tiền là " << hd.tongtien;
+}
+
+int main () {
+    int namhientai;
+    nhapnamhientai(namhientai);
+
+    hoadon A;
+    nhaphoadon(A, namhientai);
+    xuathoadon(A);
+
+    return 0;
+}
